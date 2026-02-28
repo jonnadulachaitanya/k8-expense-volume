@@ -52,6 +52,8 @@ spec:
         tier: db
         component: mysql
     spec:
+      securityContext: # We added this as we are facing some issue to accessing mysql path as it was running root.
+        fsGroup: 999
       containers:
       - name: mysql
         image: chaitanyaj293/mysql:v1
