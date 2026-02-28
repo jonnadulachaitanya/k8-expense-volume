@@ -9,7 +9,7 @@ spec:
   selector:
     project: expense
     tier: db
-    componenet: mysql
+    component: mysql
   ports:
   - protocol: TCP
     port: 3306
