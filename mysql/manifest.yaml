@@ -1,0 +1,69 @@
+# Headless Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-Headless
+  namespace: expense
+spec:
+  clusterIP: none
+  selector:
+    project: expense
+    tier: db
+    componenet: mysql
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+---
+#Normal Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: expense
+spec:
+  selector:
+    project: expense
+    tier: db
+    component: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+---
+# PVC with pod definition in statefullset
+apiVersion: v1
+kind: statefullset
+metadata:
+  name: mysql
+  namespace: expense
+spec:
+  selector:
+    project: expense
+    tier: db
+    component: mysql
+  serviceName: mysql-Headless #This is headless service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        project: expense
+        tier: db
+        component: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: chaitanyaj293/mysql:v1
+        volumeMounts:
+          name: mysql
+          mountPath: /var/lib/mysql #MySQL will store data here
+    volumeClaimTemplates:
+    - metadata:
+        name: mysql
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: ["expense-ebs"]
+        resources:
+          requests:
+            storage: 1Gi
+
