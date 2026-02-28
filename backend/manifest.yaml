@@ -22,12 +22,19 @@ spec:
       project: expense
       tier: api
       component: backend
-  containers:
-  - name: backend
-    image: chaitanyaj293/backend:v1
-    envFrom:
-    - configMapRef:
-        name: backend
+  template:
+    metadata:
+      labels:
+        project: expense
+        tier: api
+        component: backend
+    spec:
+      containers:
+      - name: backend
+        image: chaitanyaj293/backend:v1
+        envFrom:
+        - configMapRef:
+            name: backend
 ---
 apiVersion: v1
 kind: Service
