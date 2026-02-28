@@ -33,7 +33,7 @@ spec:
 ---
 # PVC with pod definition in statefullset
 apiVersion: v1
-kind: statefullset
+kind: StatefullSet
 metadata:
   name: mysql
   namespace: expense
