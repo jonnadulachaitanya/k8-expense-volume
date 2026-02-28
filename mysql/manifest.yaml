@@ -63,7 +63,7 @@ spec:
       name: mysql
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: expense-ebs
+      storageClassName: "expense-ebs"
       resources:
         requests:
           storage: 1Gi
