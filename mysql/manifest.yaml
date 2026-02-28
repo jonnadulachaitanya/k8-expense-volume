@@ -39,9 +39,10 @@ metadata:
   namespace: expense
 spec:
   selector:
-    project: expense
-    tier: db
-    component: mysql
+    matchLabels:
+      project: expense
+      tier: db
+      component: mysql
   serviceName: mysql-headless #This is headless service
   replicas: 2
   template:
@@ -55,15 +56,15 @@ spec:
       - name: mysql
         image: chaitanyaj293/mysql:v1
         volumeMounts:
-          name: mysql
+        - name: mysql
           mountPath: /var/lib/mysql #MySQL will store data here
-    volumeClaimTemplates:
-    - metadata:
-        name: mysql
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: ["expense-ebs"]
-        resources:
-          requests:
-            storage: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: expense-ebs
+      resources:
+        requests:
+          storage: 1Gi
 
