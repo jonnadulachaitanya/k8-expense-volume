@@ -5,7 +5,7 @@ metadata:
   name: mysql-headless
   namespace: expense
 spec:
-  clusterIP: none
+  clusterIP: None
   selector:
     project: expense
     tier: db
@@ -32,7 +32,7 @@ spec:
       targetPort: 3306
 ---
 # PVC with pod definition in statefullset
-apiVersion: v1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
