@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-Headless
+  name: mysql-headless
   namespace: expense
 spec:
   clusterIP: none
@@ -42,7 +42,7 @@ spec:
     project: expense
     tier: db
     component: mysql
-  serviceName: mysql-Headless #This is headless service
+  serviceName: mysql-headless #This is headless service
   replicas: 2
   template:
     metadata:
