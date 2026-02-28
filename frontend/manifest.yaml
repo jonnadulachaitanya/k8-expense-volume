@@ -16,7 +16,7 @@ spec:
       component: frontend
   template:
     metadata:
-      selector:
+      labels:
         project: expense
         tier: web
         component: frontend
